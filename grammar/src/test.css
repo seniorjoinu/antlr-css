@@ -1,6 +1,9 @@
+$x = 12px solid #aaa;
+$y = 1px;
+
 body {
     margin: 1px;
     font-size: 2em;
-    border: 1px solid #fff;
-    padding: 12;
+    border: $y solid #fff;
+    padding: $x;
 }

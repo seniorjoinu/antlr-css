@@ -1,58 +1,4 @@
-grammar css;
-
-program
-	: member*
-	;
-
-member
-	: cssClass
-	;
-
-cssClass
-	: selector '{' cssBody '}'
-	;
-
-selector
-	: Selector (('>'|'+'|'~')? Selector)*
-	;
-
-cssBody
-	: property+
-	;
-
-property
-	: propName ':' propValue+ ';'
-	;
-
-propName
-	: Name
-	;
-
-propValue
-	: numberUnit
-	| number
-	| name
-	| color
-	| string
-	;
-
-
-numberUnit
-	: NumberUnit
-	;
-color
-    : Color
-    ;
-name
-    : Name
-    ;
-number
-    : Number
-    ;
-string
-    : String
-    ;
-
+lexer grammar lexerRules;
 
 Character
 	: 'a'..'z' | 'A'..'Z' | '-' | '_'
@@ -66,6 +12,9 @@ WS 	: [ \t\r\n] -> skip
 	;
 
 
+Variable
+    : '$' (Character | Digit)+
+    ;
 Color
 	: '#' (Hex Hex Hex) | (Hex Hex Hex Hex Hex Hex)
 	;
@@ -102,4 +51,4 @@ Html
 
 String
 	: '"' .*? '"'
-	;
+    ;
