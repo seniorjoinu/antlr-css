@@ -36,4 +36,25 @@ public class CssClass {
     public void setProperty(String propName, Integer varIndex, Variable varValue) {
         properties.get(propName).set(varIndex, varValue);
     }
+
+    public void addProperty(String propName, List<Variable> properties) {
+        this.properties.put(propName, properties);
+    }
+
+    // можно сделать минимизированную модификацию
+    @Override
+    public String toString() {
+        String result = selector + " {\n";
+        for (Map.Entry<String, List<Variable>> property: properties.entrySet()) {
+            result += property.getKey() + ": ";
+            //TODO: возможно, тут тоже проблема в порядке свойств
+            for (Variable variable: property.getValue()) {
+                result += variable.getData() + " ";
+            }
+            result += ";\n";
+        }
+        result += "}\n";
+
+        return result;
+    }
 }

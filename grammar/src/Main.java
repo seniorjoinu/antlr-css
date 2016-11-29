@@ -14,7 +14,7 @@ public class Main {
         cssParser parser = new cssParser(tokens);
         ParseTree tree = parser.program();
 
-        Visitor visitor = new Visitor();
+        Visitor visitor = new Visitor(() -> {});
         visitor.visit(tree);
     }
 }
