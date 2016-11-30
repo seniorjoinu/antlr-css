@@ -8,12 +8,8 @@ program
 // сложные правила
 member
 	: cssClass
-	| varDefinition
+//	| varDefinition
 	;
-
-varDefinition
-    : variable '=' propValue+ ';'
-    ;
 
 cssClass
 	: selector '{' cssBody '}'
@@ -24,11 +20,11 @@ selector
 	;
 
 cssBody
-	: property+
+	: property+ cssClass*
 	;
 
 property
-	: propName ':' (propValue | variable)+ ';'
+	: propName ':' propValue+ ';'
 	;
 
 propName
@@ -41,6 +37,7 @@ propValue
 	| name
 	| color
 	| string
+	| id
 	;
 
 
@@ -60,6 +57,6 @@ number
 string
     : String
     ;
-variable
+id
     : Variable
     ;

@@ -28,16 +28,6 @@ public interface cssListener extends ParseTreeListener {
 	 */
 	void exitMember(cssParser.MemberContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link cssParser#varDefinition}.
-	 * @param ctx the parse tree
-	 */
-	void enterVarDefinition(cssParser.VarDefinitionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link cssParser#varDefinition}.
-	 * @param ctx the parse tree
-	 */
-	void exitVarDefinition(cssParser.VarDefinitionContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link cssParser#cssClass}.
 	 * @param ctx the parse tree
 	 */
@@ -148,13 +138,13 @@ public interface cssListener extends ParseTreeListener {
 	 */
 	void exitString(cssParser.StringContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link cssParser#variable}.
+	 * Enter a parse tree produced by {@link cssParser#id}.
 	 * @param ctx the parse tree
 	 */
-	void enterVariable(cssParser.VariableContext ctx);
+	void enterId(cssParser.IdContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link cssParser#variable}.
+	 * Exit a parse tree produced by {@link cssParser#id}.
 	 * @param ctx the parse tree
 	 */
-	void exitVariable(cssParser.VariableContext ctx);
+	void exitId(cssParser.IdContext ctx);
 }

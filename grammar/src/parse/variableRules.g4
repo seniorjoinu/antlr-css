@@ -1,0 +1,5 @@
+parser grammar variableRules;
+
+varDefinition
+    :
+    ;

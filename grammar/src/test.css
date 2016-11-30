@@ -1,9 +1,26 @@
-$x = 12px solid #aaa;
-$y = 1px;
+$padding = 10px;
+$color = #fff;
 
 body {
     margin: 1px;
     font-size: 2em;
-    border: $y solid #fff;
-    padding: $x;
+    border: 1px solid $color;
+    padding: $padding;
+
+    .class1 > p {
+        margin-left: 10px;
+        width: 100%;
+        background-color: $color;
+        padding: $padding;
+    }
+
+    $for ($i = 0; $i < 10; $i++) {
+        ul > li:nth-child($i) {
+            $if ($i % 2 == 0) {
+                margin-left: $i * 10px;
+            } $else {
+                margin-left: $i * 5px;
+            }
+        }
+    }
 }

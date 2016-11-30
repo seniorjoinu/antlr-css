@@ -31,13 +31,6 @@ public class cssBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements cs
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitVarDefinition(cssParser.VarDefinitionContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitCssClass(cssParser.CssClassContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -115,5 +108,5 @@ public class cssBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements cs
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitVariable(cssParser.VariableContext ctx) { return visitChildren(ctx); }
+	@Override public T visitId(cssParser.IdContext ctx) { return visitChildren(ctx); }
 }

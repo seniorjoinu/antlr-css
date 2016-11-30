@@ -10,6 +10,12 @@ Hex	: 'a'..'f' | 'A'..'F' | '0'..'9'
 	;
 WS 	: [ \t\r\n] -> skip
 	;
+For : '$for'
+    ;
+If  : '$if'
+    ;
+Else: '$else'
+    ;
 
 
 Variable
@@ -19,9 +25,7 @@ Color
 	: '#' (Hex Hex Hex) | (Hex Hex Hex Hex Hex Hex)
 	;
 Selector
-	: Html
-	| (('#'|'.') Character (Character | Digit)*)
-	| '*'
+	: (Html | (('#'|'.') Character (Character | Digit)*) | '*') (PseudoClass | PseudoElement '(' .*? ')' )*
 	;
 Name
 	: Character+
@@ -48,7 +52,16 @@ Html
 	| 'var' | 'header' | 'hgroup' | 'nav' | 'article' | 'section' | 'aside' | 'footer' | 'address'
 	| 'figure' | 'figcaption' | 'rp' | 'rt' | 'ruby' | 'time' | 'mark' | 'bdi' | 'wbr'
 	;
-
+PseudoClass
+    : ':active' | ':any' | ':checked' | ':default' | ':disabled' | ':empty' | ':enabled' | ':first'
+    | ':first-child' | ':first-of-type' | ':fullscreen' | ':focus' | ':hover' | ':indeterminate' | ':in-range'
+    | ':invalid' | ':last-child' | ':last-of-type' | ':left' | ':link' | ':nth-last-of-type'| ':only-child'
+    | ':only-of-type' | ':optional' | ':out-of-range' | ':read-only' | ':read-write' | ':required' | ':right'
+    | ':root' | ':scope' | ':target' | ':valid' | ':visited'
+    ;
+PseudoElement
+    : ':dir' | ':lang' | ':not' | ':nth-child' | ':nth-last-child' | ':nth-of-type'
+    ;
 String
 	: '"' .*? '"'
     ;

@@ -23,12 +23,6 @@ public interface cssVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMember(cssParser.MemberContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link cssParser#varDefinition}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVarDefinition(cssParser.VarDefinitionContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link cssParser#cssClass}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -95,9 +89,9 @@ public interface cssVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitString(cssParser.StringContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link cssParser#variable}.
+	 * Visit a parse tree produced by {@link cssParser#id}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitVariable(cssParser.VariableContext ctx);
+	T visitId(cssParser.IdContext ctx);
 }

@@ -40,18 +40,6 @@ public class cssBaseListener implements cssListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVarDefinition(cssParser.VarDefinitionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitVarDefinition(cssParser.VarDefinitionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterCssClass(cssParser.CssClassContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -184,13 +172,13 @@ public class cssBaseListener implements cssListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVariable(cssParser.VariableContext ctx) { }
+	@Override public void enterId(cssParser.IdContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVariable(cssParser.VariableContext ctx) { }
+	@Override public void exitId(cssParser.IdContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
