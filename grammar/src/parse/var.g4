@@ -18,7 +18,7 @@ varExpr
     ;
 
 varDefinition
-    : id '=' expression+ ';'
+    : id '=' expression ';'
     ;
 
 predicate
@@ -32,11 +32,11 @@ predicate
     ;
 
 forDefinition
-    : For '(' id 'from' number 'to' number ')' '{' member+ '}'
+    : For '(' id 'from' startCount=number 'to' endCount=number ')' '{' forBody=member+ '}'
     ;
 
 ifDefinition
-    : If '(' predicate ')' '{' member+ '}' (Else '{' member+ '}')?
+    : If '(' predicate ')' '{' trueMembers=member+ '}' (Else '{' falseMembers=member+ '}')?
     ;
 
 expression
@@ -59,6 +59,7 @@ propValue
 	| color
 	| string
 	| id
+	| bool
 	;
 
 
@@ -81,4 +82,8 @@ string
     ;
 id
     : Variable
+    ;
+bool
+    : 'true'
+    | 'false'
     ;

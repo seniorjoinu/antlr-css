@@ -6,5 +6,6 @@ public enum VarType {
     NUMBERUNIT,
     PROPERTY,
     COLOR,
-    NONE
+    NONE,
+    BOOLEAN
 }

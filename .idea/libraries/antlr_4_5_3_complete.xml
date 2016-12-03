@@ -2,6 +2,7 @@
   <library name="antlr-4.5.3-complete">
     <CLASSES>
       <root url="jar://C:/javalib/antlr-4.5.3-complete.jar!/" />
+      <root url="jar://C:/JavaLibs/antlr-4.5.3-complete.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

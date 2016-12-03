@@ -1,4 +1,4 @@
-// Generated from C:/IdeaProjects/antlr-css/grammar/src/parse\var.g4 by ANTLR 4.5.3
+// Generated from C:/IdeaProjects/antlr-css1/grammar/src/parse\var.g4 by ANTLR 4.5.3
 package core.gen;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -185,4 +185,10 @@ public interface varVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitId(varParser.IdContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link varParser#bool}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBool(varParser.BoolContext ctx);
 }

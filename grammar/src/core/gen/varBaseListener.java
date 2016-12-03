@@ -1,4 +1,4 @@
-// Generated from C:/IdeaProjects/antlr-css/grammar/src/parse\var.g4 by ANTLR 4.5.3
+// Generated from C:/IdeaProjects/antlr-css1/grammar/src/parse\var.g4 by ANTLR 4.5.3
 package core.gen;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -335,6 +335,18 @@ public class varBaseListener implements varListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitId(varParser.IdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBool(varParser.BoolContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBool(varParser.BoolContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

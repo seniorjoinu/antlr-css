@@ -16,6 +16,10 @@ public class VirtualMachine {
         memory.put(name, var);
     }
 
+    public void unstoreVariable(String name) {
+        memory.remove(name);
+    }
+
     public Variable getVariable(String name) {
         return memory.get(name);
     }
