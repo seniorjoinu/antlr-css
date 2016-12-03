@@ -8,7 +8,7 @@ program
 // сложные правила
 member
 	: cssClass
-//	| varDefinition
+//  | varExpr
 	;
 
 cssClass

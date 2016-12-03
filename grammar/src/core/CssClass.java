@@ -1,16 +1,18 @@
 package core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class CssClass {
     private String selector;
-    private Map<String, List<Variable>> properties;
+    private List<CssProperty> properties;
 
     public CssClass(String selector) {
         this.selector = selector;
-        properties = new HashMap<>();
+        properties = new ArrayList<>();
     }
 
     public String getSelector() {
@@ -21,37 +23,34 @@ public class CssClass {
         this.selector = selector;
     }
 
-    public Map<String, List<Variable>> getProperties() {
+    public List<CssProperty> getProperties() {
         return properties;
     }
 
-    public void setProperties(Map<String, List<Variable>> properties) {
+    public void setProperties(List<CssProperty> properties) {
         this.properties = properties;
     }
 
-    public List<Variable> getProperty(String propName) {
-        return properties.get(propName);
+    public CssProperty getPropertyByName(String propName) {
+        List<CssProperty> props = properties.stream().filter(prop -> prop.getName().equals(propName)).collect(Collectors.toList());
+        if (props.size() > 0) {
+            return props.get(0);
+        }
+        return null;
     }
 
-    public void setProperty(String propName, Integer varIndex, Variable varValue) {
-        properties.get(propName).set(varIndex, varValue);
+    //TODO: поправить коллизию имен
+    public void addProperty(CssProperty property) {
+        this.properties.add(property);
     }
 
-    public void addProperty(String propName, List<Variable> properties) {
-        this.properties.put(propName, properties);
-    }
-
+    //TODO: доделать вложенность
     // можно сделать минимизированную модификацию
     @Override
     public String toString() {
         String result = selector + " {\n";
-        for (Map.Entry<String, List<Variable>> property: properties.entrySet()) {
-            result += property.getKey() + ": ";
-            //TODO: возможно, тут тоже проблема в порядке свойств
-            for (Variable variable: property.getValue()) {
-                result += variable.getData() + " ";
-            }
-            result += ";\n";
+        for (CssProperty property: properties) {
+            result += "\t" + property.toString() + "\n";
         }
         result += "}\n";
 

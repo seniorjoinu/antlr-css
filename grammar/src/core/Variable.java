@@ -2,9 +2,9 @@ package core;
 
 public class Variable {
     private VarType type;
-    private String data;
+    private Object data;
 
-    public Variable(VarType type, String data) {
+    public Variable(VarType type, Object data) {
         this.type = type;
         this.data = data;
     }
@@ -17,11 +17,19 @@ public class Variable {
         this.type = type;
     }
 
-    public String getData() {
+    public Object getData() {
         return data;
     }
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "Variable{" +
+                "type=" + type +
+                ", data=" + data +
+                '}';
     }
 }

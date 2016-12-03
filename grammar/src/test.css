@@ -1,26 +1,11 @@
 $padding = 10px;
 $color = #fff;
 
-body {
-    margin: 1px;
-    font-size: 2em;
-    border: 1px solid $color;
-    padding: $padding;
-
-    .class1 > p {
-        margin-left: 10px;
-        width: 100%;
-        background-color: $color;
-        padding: $padding;
+for ($i from 9 to 10) {
+    if ($i % 2 == 0) {
+        print $i * 10;
     }
-
-    $for ($i = 0; $i < 10; $i++) {
-        ul > li:nth-child($i) {
-            $if ($i % 2 == 0) {
-                margin-left: $i * 10px;
-            } $else {
-                margin-left: $i * 5px;
-            }
-        }
+    else {
+        print $i / 5;
     }
 }

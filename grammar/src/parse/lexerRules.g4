@@ -10,11 +10,11 @@ Hex	: 'a'..'f' | 'A'..'F' | '0'..'9'
 	;
 WS 	: [ \t\r\n] -> skip
 	;
-For : '$for'
+For : 'for'
     ;
-If  : '$if'
+If  : 'if'
     ;
-Else: '$else'
+Else: 'else'
     ;
 
 
