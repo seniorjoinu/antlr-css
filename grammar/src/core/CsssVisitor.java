@@ -1,26 +1,28 @@
 package core;
 
-import core.gen.varBaseVisitor;
-import core.gen.varParser;
+import core.gen.csssBaseVisitor;
+import core.gen.csssParser;
 
-public class VarVisitor extends varBaseVisitor<Variable> {
+import java.io.IOException;
+
+public class CsssVisitor extends csssBaseVisitor<Variable> {
     private VirtualMachine vMachine;
 
-    public VarVisitor() {
+    public CsssVisitor() {
         super();
         vMachine = new VirtualMachine();
     }
 
     // печать на экран
     @Override
-    public Variable visitPrint(varParser.PrintContext ctx) {
+    public Variable visitPrint(csssParser.PrintContext ctx) {
         System.out.println(visit(ctx.expression()).getData().toString());
         return null;
     }
 
     // эвалюатор
     @Override
-    public Variable visitExprPropValue(varParser.ExprPropValueContext ctx) {
+    public Variable visitExprPropValue(csssParser.ExprPropValueContext ctx) {
         if (ctx.propValue().string() != null) {
             return new Variable(VarType.STRING, ctx.propValue().getText().substring(1, ctx.propValue().getText().length()-1));
         } else if (ctx.propValue().color() != null) {
@@ -42,7 +44,7 @@ public class VarVisitor extends varBaseVisitor<Variable> {
 
     // определение переменной
     @Override
-    public Variable visitVarDefinition(varParser.VarDefinitionContext ctx) {
+    public Variable visitVarDefinition(csssParser.VarDefinitionContext ctx) {
         Variable result = visit(ctx.expression());
         vMachine.storeVariable(ctx.id().getText(), result);
         return result;
@@ -50,7 +52,7 @@ public class VarVisitor extends varBaseVisitor<Variable> {
 
     // определение условного оператора
     @Override
-    public Variable visitIfDefinition(varParser.IfDefinitionContext ctx) {
+    public Variable visitIfDefinition(csssParser.IfDefinitionContext ctx) {
         if (visit(ctx.predicate()).getData().equals("true")) {
             return visit(ctx.trueMembers);
         } else {
@@ -60,7 +62,7 @@ public class VarVisitor extends varBaseVisitor<Variable> {
 
     // определение тела цикла
     @Override
-    public Variable visitForDefinition(varParser.ForDefinitionContext ctx) {
+    public Variable visitForDefinition(csssParser.ForDefinitionContext ctx) {
         Long start = (new Variable(VarType.NUMBER, ctx.startCount.getText())).doubleValue().longValue();
         Long end = (new Variable(VarType.NUMBER, ctx.endCount.getText())).doubleValue().longValue();
 
@@ -77,7 +79,7 @@ public class VarVisitor extends varBaseVisitor<Variable> {
     /* Что касается арифметики */
     // +-
     @Override
-    public Variable visitAddsub(varParser.AddsubContext ctx) {
+    public Variable visitAddsub(csssParser.AddsubContext ctx) {
         Variable var1 = visit(ctx.expression().get(0));
         Variable var2 = visit(ctx.expression().get(1));
         if (ctx.op.getText().equals("+")) {
@@ -119,7 +121,7 @@ public class VarVisitor extends varBaseVisitor<Variable> {
     }
     // */
     @Override
-    public Variable visitMultdiv(varParser.MultdivContext ctx) {
+    public Variable visitMultdiv(csssParser.MultdivContext ctx) {
         Variable var1 = visit(ctx.expression(0));
         Variable var2 = visit(ctx.expression(1));
         if (ctx.op.getText().equals("*")) {
@@ -156,7 +158,7 @@ public class VarVisitor extends varBaseVisitor<Variable> {
     }
     // %
     @Override
-    public Variable visitModulo(varParser.ModuloContext ctx) {
+    public Variable visitModulo(csssParser.ModuloContext ctx) {
         Variable var1 = visit(ctx.expression(0));
         Variable var2 = visit(ctx.expression(1));
         switch (vMachine.checkTypeSimilarity(var1, var2)) {
@@ -169,7 +171,7 @@ public class VarVisitor extends varBaseVisitor<Variable> {
 
     // ()
     @Override
-    public Variable visitParensExpr(varParser.ParensExprContext ctx) {
+    public Variable visitParensExpr(csssParser.ParensExprContext ctx) {
         return visit(ctx.expression());
     }
 
@@ -177,7 +179,7 @@ public class VarVisitor extends varBaseVisitor<Variable> {
     /* Что касается предикатов */
     // ==
     @Override
-    public Variable visitEq(varParser.EqContext ctx) {
+    public Variable visitEq(csssParser.EqContext ctx) {
         Variable var1 = visit(ctx.predicate(0));
         Variable var2 = visit(ctx.predicate(1));
 
@@ -192,7 +194,48 @@ public class VarVisitor extends varBaseVisitor<Variable> {
 
 
     @Override
-    public Variable visitExprPred(varParser.ExprPredContext ctx) {
+    public Variable visitExprPred(csssParser.ExprPredContext ctx) {
         return visit(ctx.expression());
+    }
+
+
+    /* Что касается классов */
+
+    @Override
+    public Variable visitSelector(csssParser.SelectorContext ctx) {
+        if (ctx.op != null) {
+            vMachine.startClass(ctx.op.getText() + " " + ctx.getText().substring(1));
+        } else {
+            vMachine.startClass(ctx.getText());
+        }
+        return null;
+    }
+
+    @Override
+    public Variable visitClassBody(csssParser.ClassBodyContext ctx) {
+        CssProperty property;
+        for (csssParser.PropertyContext pctx: ctx.property()) {
+            property = new CssProperty(pctx.propName().getText());
+            for (csssParser.ExpressionContext ectx: pctx.expression()) {
+                property.addValue(visit(ectx));
+            }
+            vMachine.addProperty(property);
+        }
+
+        //TODO: тут можно задать отдельную логику для выражений
+        ctx.definition().stream().filter(dctx -> dctx.classDefinition() != null).forEach(dctx -> {
+            visit(dctx.classDefinition());
+        });
+        vMachine.endClass();
+
+        return null;
+    }
+
+    public void dump(String filename) {
+        try {
+            vMachine.dumpClasses(filename);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

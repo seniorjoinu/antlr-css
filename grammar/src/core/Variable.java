@@ -56,7 +56,7 @@ public class Variable {
                 return 0.0;
             }
         } else if (type == VarType.NUMBERUNIT) {
-            return Double.parseDouble(data.toString().replaceAll("[a-zA-Z_-]", ""));
+            return Double.parseDouble(data.toString().replaceAll("[a-zA-Z_%-]", ""));
         } else {
             return 0.0;
         }

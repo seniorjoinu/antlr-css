@@ -1,15 +1,29 @@
 package core;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.*;
 
 public class VirtualMachine {
     private Map<String, Variable> memory;
     private Map<String, CssClass> classes;
+    private Stack<String> currentSelector;
+
+    private String concatSelector() {
+        String result = "";
+        for (String s: currentSelector) {
+            if (currentSelector.indexOf(s) != 0) {
+                result += " ";
+            }
+            result += s;
+        }
+        return result;
+    }
 
     public VirtualMachine() {
         memory = new HashMap<>();
         classes = new HashMap<>();
+        currentSelector = new Stack<>();
     }
 
     public void storeVariable(String name, Variable var) {
@@ -38,5 +52,24 @@ public class VirtualMachine {
         } else {
             return VarType.NONE;
         }
+    }
+
+    public void startClass(String selector) {
+        currentSelector.push(selector);
+        classes.put(concatSelector(), new CssClass(concatSelector()));
+    }
+
+    public void addProperty(CssProperty property) {
+        classes.get(concatSelector()).addProperty(property);
+    }
+
+    public void endClass() {
+        currentSelector.pop();
+    }
+
+    public void dumpClasses(String filename) throws IOException {
+        PrintWriter writer = new PrintWriter(filename, "UTF-8");
+        classes.values().forEach(writer::print);
+        writer.close();
     }
 }

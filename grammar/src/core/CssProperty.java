@@ -39,7 +39,7 @@ public class CssProperty {
             if (values.indexOf(var) > 0) {
                 result += " ";
             }
-            result += var;
+            result += var.getData().toString();
         }
         result += ";";
         return result;
