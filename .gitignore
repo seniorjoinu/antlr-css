@@ -43,3 +43,7 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+.gitignore
+.idea/vcs.xml
+out/
+test.css
