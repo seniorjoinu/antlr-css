@@ -6,31 +6,33 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="core.controller.IdeController">
    <top>
       <MenuBar prefHeight="22.0" prefWidth="137.0" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="New" />
-                  <MenuItem mnemonicParsing="false" text="Save" />
-                  <MenuItem mnemonicParsing="false" text="Exit" />
+                <MenuItem fx:id="newButton" mnemonicParsing="false" text="New" />
+                <MenuItem fx:id="openButton" mnemonicParsing="false" text="Open..." />
+                <MenuItem fx:id="saveButton" mnemonicParsing="false" text="Save" />
+                <MenuItem fx:id="saveAsButton" mnemonicParsing="false" text="Save As..." />
+                <MenuItem fx:id="exitButton" mnemonicParsing="false" text="Exit" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Process">
               <items>
-                <MenuItem mnemonicParsing="false" text="Run" />
+                <MenuItem fx:id="runButton" mnemonicParsing="false" text="Run" />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-                  <MenuItem mnemonicParsing="false" text="CSSS guide" />
+                  <MenuItem fx:id="helpButton" mnemonicParsing="false" text="CSSS guide" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
    </top>
    <center>
-      <TextArea id="textarea" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <TextArea fx:id="codeTextArea" id="textarea" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
