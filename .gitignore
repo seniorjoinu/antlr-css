@@ -45,5 +45,6 @@ fabric.properties
 
 .gitignore
 .idea/vcs.xml
+.idea/
 out/
 test.css
