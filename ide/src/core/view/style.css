@@ -1,0 +1,15 @@
+.text-area {
+    -fx-background-color: white;
+}
+
+.text-area .scroll-pane, .text-area .scroll-pane .viewport, .text-area .scroll-pane .content {
+    -fx-background-color: transparent;
+}
+
+.menu:hover, .menu:showing {
+    -fx-background-color: #FF0094;
+}
+
+.menu-item:hover {
+    -fx-background-color: #0096C9;
+}
