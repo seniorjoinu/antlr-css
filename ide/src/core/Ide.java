@@ -78,7 +78,6 @@ public class Ide extends Application {
             controller.saveAsButton.setOnAction(event -> {
                 file = fileChooser.showSaveDialog(primaryStage);
                 controller.saveButton.fire();
-
             });
 
             controller.runButton.setOnAction(event -> {
@@ -96,6 +95,8 @@ public class Ide extends Application {
                     e.printStackTrace();
                 }
             });
+
+
 
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
