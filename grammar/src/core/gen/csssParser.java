@@ -1,5 +1,6 @@
-// Generated from C:/IdeaProjects/antlr-css1/grammar/src/parse\csss.g4 by ANTLR 4.5.3
+// Generated from C:/IdeaProjects/antlr-css/grammar/src/parse\csss.g4 by ANTLR 4.5.3
 package core.gen;
+import core.controller.IdeController;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -20,7 +21,7 @@ public class csssParser extends Parser {
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
 		T__17=18, T__18=19, T__19=20, T__20=21, T__21=22, T__22=23, T__23=24, 
-		T__24=25, T__25=26, Character=27, Digit=28, Hex=29, WS=30, For=31, If=32, 
+		Character=25, Digit=26, Hex=27, WS=28, For=29, From=30, To=31, If=32, 
 		Else=33, Variable=34, Color=35, Selector=36, Name=37, NumberUnit=38, Number=39, 
 		Unit=40, Html=41, PseudoClass=42, PseudoElement=43, String=44;
 	public static final int
@@ -39,14 +40,14 @@ public class csssParser extends Parser {
 
 	private static final String[] _LITERAL_NAMES = {
 		null, "'{'", "'}'", "'>'", "'+'", "'~'", "':'", "';'", "'='", "'<'", "'>='", 
-		"'<='", "'=='", "'and'", "'or'", "'not'", "'('", "')'", "'from'", "'to'", 
-		"'*'", "'/'", "'-'", "'%'", "'print'", "'true'", "'false'", null, null, 
-		null, null, "'for'", "'if'", "'else'"
+		"'<='", "'=='", "'and'", "'or'", "'not'", "'('", "')'", "'*'", "'/'", 
+		"'-'", "'%'", "'print'", "'true'", "'false'", null, null, null, null, 
+		"'for'", "'from'", "'to'", "'if'", "'else'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
 		null, null, null, null, null, null, null, null, null, null, null, null, 
-		null, null, null, "Character", "Digit", "Hex", "WS", "For", "If", "Else", 
+		null, "Character", "Digit", "Hex", "WS", "For", "From", "To", "If", "Else", 
 		"Variable", "Color", "Selector", "Name", "NumberUnit", "Number", "Unit", 
 		"Html", "PseudoClass", "PseudoElement", "String"
 	};
@@ -94,6 +95,17 @@ public class csssParser extends Parser {
 
 	@Override
 	public ATN getATN() { return _ATN; }
+	    private IdeController controller;
+
+	    public csssParser(TokenStream input, IdeController controller) {
+	    	this(input);
+	    	this.controller = controller;
+	    }
+
+	    public void notifyErrorListeners(Token offendingToken, String msg, RecognitionException e) {
+	        super.notifyErrorListeners(offendingToken, msg, e);
+	        this.controller.errorLabel.setText(msg);
+	    }
 
 	public csssParser(TokenStream input) {
 		super(input);
@@ -111,14 +123,6 @@ public class csssParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_program; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterProgram(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitProgram(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitProgram(this);
 			else return visitor.visitChildren(this);
@@ -135,7 +139,7 @@ public class csssParser extends Parser {
 			setState(47);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__3) | (1L << T__4) | (1L << T__15) | (1L << T__23) | (1L << T__24) | (1L << T__25) | (1L << Digit) | (1L << For) | (1L << If) | (1L << Variable) | (1L << Color) | (1L << Selector) | (1L << Name) | (1L << NumberUnit) | (1L << Number) | (1L << String))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__3) | (1L << T__4) | (1L << T__15) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << Digit) | (1L << For) | (1L << If) | (1L << Variable) | (1L << Color) | (1L << Selector) | (1L << Name) | (1L << NumberUnit) | (1L << Number) | (1L << String))) != 0)) {
 				{
 				{
 				setState(44);
@@ -170,14 +174,6 @@ public class csssParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_member; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterMember(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitMember(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitMember(this);
@@ -236,14 +232,6 @@ public class csssParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_definition; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterDefinition(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitDefinition(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitDefinition(this);
@@ -315,14 +303,6 @@ public class csssParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_classDefinition; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterClassDefinition(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitClassDefinition(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitClassDefinition(this);
 			else return visitor.visitChildren(this);
@@ -366,14 +346,6 @@ public class csssParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_selector; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterSelector(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitSelector(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitSelector(this);
@@ -448,14 +420,6 @@ public class csssParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_classBody; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterClassBody(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitClassBody(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitClassBody(this);
 			else return visitor.visitChildren(this);
@@ -525,14 +489,6 @@ public class csssParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_property; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterProperty(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitProperty(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitProperty(this);
 			else return visitor.visitChildren(this);
@@ -563,7 +519,7 @@ public class csssParser extends Parser {
 				setState(90); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__15) | (1L << T__23) | (1L << T__24) | (1L << T__25) | (1L << Digit) | (1L << Variable) | (1L << Color) | (1L << Name) | (1L << NumberUnit) | (1L << Number) | (1L << String))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__15) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << Digit) | (1L << Variable) | (1L << Color) | (1L << Name) | (1L << NumberUnit) | (1L << Number) | (1L << String))) != 0) );
 			setState(92);
 			match(T__6);
 			}
@@ -585,14 +541,6 @@ public class csssParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_propName; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterPropName(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitPropName(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitPropName(this);
@@ -632,14 +580,6 @@ public class csssParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_varDefinition; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterVarDefinition(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitVarDefinition(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitVarDefinition(this);
@@ -695,14 +635,6 @@ public class csssParser extends Parser {
 		}
 		public LtgtContext(PredicateContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterLtgt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitLtgt(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitLtgt(this);
 			else return visitor.visitChildren(this);
@@ -718,14 +650,6 @@ public class csssParser extends Parser {
 		}
 		public NotContext(PredicateContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterNot(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitNot(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitNot(this);
 			else return visitor.visitChildren(this);
@@ -736,14 +660,6 @@ public class csssParser extends Parser {
 			return getRuleContext(PredicateContext.class,0);
 		}
 		public ParensPredContext(PredicateContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterParensPred(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitParensPred(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitParensPred(this);
@@ -760,14 +676,6 @@ public class csssParser extends Parser {
 		}
 		public EqContext(PredicateContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterEq(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitEq(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitEq(this);
 			else return visitor.visitChildren(this);
@@ -783,14 +691,6 @@ public class csssParser extends Parser {
 		}
 		public AndorContext(PredicateContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterAndor(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitAndor(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitAndor(this);
 			else return visitor.visitChildren(this);
@@ -801,14 +701,6 @@ public class csssParser extends Parser {
 			return getRuleContext(ExpressionContext.class,0);
 		}
 		public ExprPredContext(PredicateContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterExprPred(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitExprPred(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitExprPred(this);
@@ -824,14 +716,6 @@ public class csssParser extends Parser {
 			return getRuleContext(PredicateContext.class,i);
 		}
 		public LeqgeqContext(PredicateContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterLeqgeq(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitLeqgeq(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitLeqgeq(this);
@@ -1000,6 +884,8 @@ public class csssParser extends Parser {
 		public IdContext id() {
 			return getRuleContext(IdContext.class,0);
 		}
+		public TerminalNode From() { return getToken(csssParser.From, 0); }
+		public TerminalNode To() { return getToken(csssParser.To, 0); }
 		public List<NumberContext> number() {
 			return getRuleContexts(NumberContext.class);
 		}
@@ -1016,14 +902,6 @@ public class csssParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_forDefinition; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterForDefinition(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitForDefinition(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitForDefinition(this);
@@ -1045,11 +923,11 @@ public class csssParser extends Parser {
 			setState(131);
 			id();
 			setState(132);
-			match(T__17);
+			match(From);
 			setState(133);
 			((ForDefinitionContext)_localctx).startCount = number();
 			setState(134);
-			match(T__18);
+			match(To);
 			setState(135);
 			((ForDefinitionContext)_localctx).endCount = number();
 			setState(136);
@@ -1069,7 +947,7 @@ public class csssParser extends Parser {
 				setState(141); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__3) | (1L << T__4) | (1L << T__15) | (1L << T__23) | (1L << T__24) | (1L << T__25) | (1L << Digit) | (1L << For) | (1L << If) | (1L << Variable) | (1L << Color) | (1L << Selector) | (1L << Name) | (1L << NumberUnit) | (1L << Number) | (1L << String))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__3) | (1L << T__4) | (1L << T__15) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << Digit) | (1L << For) | (1L << If) | (1L << Variable) | (1L << Color) | (1L << Selector) | (1L << Name) | (1L << NumberUnit) | (1L << Number) | (1L << String))) != 0) );
 			setState(143);
 			match(T__1);
 			}
@@ -1103,14 +981,6 @@ public class csssParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_ifDefinition; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterIfDefinition(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitIfDefinition(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitIfDefinition(this);
@@ -1148,7 +1018,7 @@ public class csssParser extends Parser {
 				setState(153); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__3) | (1L << T__4) | (1L << T__15) | (1L << T__23) | (1L << T__24) | (1L << T__25) | (1L << Digit) | (1L << For) | (1L << If) | (1L << Variable) | (1L << Color) | (1L << Selector) | (1L << Name) | (1L << NumberUnit) | (1L << Number) | (1L << String))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__3) | (1L << T__4) | (1L << T__15) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << Digit) | (1L << For) | (1L << If) | (1L << Variable) | (1L << Color) | (1L << Selector) | (1L << Name) | (1L << NumberUnit) | (1L << Number) | (1L << String))) != 0) );
 			setState(155);
 			match(T__1);
 			setState(165);
@@ -1172,7 +1042,7 @@ public class csssParser extends Parser {
 					setState(161); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
-				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__3) | (1L << T__4) | (1L << T__15) | (1L << T__23) | (1L << T__24) | (1L << T__25) | (1L << Digit) | (1L << For) | (1L << If) | (1L << Variable) | (1L << Color) | (1L << Selector) | (1L << Name) | (1L << NumberUnit) | (1L << Number) | (1L << String))) != 0) );
+				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__3) | (1L << T__4) | (1L << T__15) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << Digit) | (1L << For) | (1L << If) | (1L << Variable) | (1L << Color) | (1L << Selector) | (1L << Name) | (1L << NumberUnit) | (1L << Number) | (1L << String))) != 0) );
 				setState(163);
 				match(T__1);
 				}
@@ -1208,14 +1078,6 @@ public class csssParser extends Parser {
 		}
 		public ExprPropValueContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterExprPropValue(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitExprPropValue(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitExprPropValue(this);
 			else return visitor.visitChildren(this);
@@ -1231,14 +1093,6 @@ public class csssParser extends Parser {
 		}
 		public AddsubContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterAddsub(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitAddsub(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitAddsub(this);
 			else return visitor.visitChildren(this);
@@ -1253,14 +1107,6 @@ public class csssParser extends Parser {
 		}
 		public ModuloContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterModulo(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitModulo(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitModulo(this);
 			else return visitor.visitChildren(this);
@@ -1272,14 +1118,6 @@ public class csssParser extends Parser {
 		}
 		public ParensExprContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterParensExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitParensExpr(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitParensExpr(this);
 			else return visitor.visitChildren(this);
@@ -1290,14 +1128,6 @@ public class csssParser extends Parser {
 			return getRuleContext(PrintContext.class,0);
 		}
 		public PrntContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterPrnt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitPrnt(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitPrnt(this);
@@ -1313,14 +1143,6 @@ public class csssParser extends Parser {
 			return getRuleContext(ExpressionContext.class,i);
 		}
 		public MultdivContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterMultdiv(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitMultdiv(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitMultdiv(this);
@@ -1346,8 +1168,8 @@ public class csssParser extends Parser {
 			{
 			setState(174);
 			switch (_input.LA(1)) {
-			case T__24:
-			case T__25:
+			case T__22:
+			case T__23:
 			case Digit:
 			case Variable:
 			case Color:
@@ -1377,7 +1199,7 @@ public class csssParser extends Parser {
 				match(T__16);
 				}
 				break;
-			case T__23:
+			case T__21:
 				{
 				_localctx = new PrntContext(_localctx);
 				_ctx = _localctx;
@@ -1410,7 +1232,7 @@ public class csssParser extends Parser {
 						setState(177);
 						((MultdivContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
-						if ( !(_la==T__19 || _la==T__20) ) {
+						if ( !(_la==T__17 || _la==T__18) ) {
 							((MultdivContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						} else {
 							consume();
@@ -1428,7 +1250,7 @@ public class csssParser extends Parser {
 						setState(180);
 						((AddsubContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
-						if ( !(_la==T__3 || _la==T__21) ) {
+						if ( !(_la==T__3 || _la==T__19) ) {
 							((AddsubContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						} else {
 							consume();
@@ -1444,7 +1266,7 @@ public class csssParser extends Parser {
 						setState(182);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
 						setState(183);
-						match(T__22);
+						match(T__20);
 						setState(184);
 						expression(5);
 						}
@@ -1478,14 +1300,6 @@ public class csssParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_print; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterPrint(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitPrint(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitPrint(this);
 			else return visitor.visitChildren(this);
@@ -1499,7 +1313,7 @@ public class csssParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(190);
-			match(T__23);
+			match(T__21);
 			setState(191);
 			expression(0);
 			setState(192);
@@ -1543,14 +1357,6 @@ public class csssParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_propValue; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterPropValue(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitPropValue(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitPropValue(this);
@@ -1607,8 +1413,8 @@ public class csssParser extends Parser {
 				id();
 				}
 				break;
-			case T__24:
-			case T__25:
+			case T__22:
+			case T__23:
 				enterOuterAlt(_localctx, 7);
 				{
 				setState(200);
@@ -1636,14 +1442,6 @@ public class csssParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_numberUnit; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterNumberUnit(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitNumberUnit(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitNumberUnit(this);
@@ -1679,14 +1477,6 @@ public class csssParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_color; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterColor(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitColor(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitColor(this);
 			else return visitor.visitChildren(this);
@@ -1720,14 +1510,6 @@ public class csssParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_name; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterName(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitName(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitName(this);
@@ -1763,14 +1545,6 @@ public class csssParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_number; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterNumber(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitNumber(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitNumber(this);
@@ -1812,14 +1586,6 @@ public class csssParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_string; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterString(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitString(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitString(this);
 			else return visitor.visitChildren(this);
@@ -1854,14 +1620,6 @@ public class csssParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_id; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterId(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitId(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitId(this);
 			else return visitor.visitChildren(this);
@@ -1895,14 +1653,6 @@ public class csssParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_bool; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).enterBool(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof csssListener ) ((csssListener)listener).exitBool(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof csssVisitor ) return ((csssVisitor<? extends T>)visitor).visitBool(this);
 			else return visitor.visitChildren(this);
@@ -1918,7 +1668,7 @@ public class csssParser extends Parser {
 			{
 			setState(215);
 			_la = _input.LA(1);
-			if ( !(_la==T__24 || _la==T__25) ) {
+			if ( !(_la==T__22 || _la==T__23) ) {
 			_errHandler.recoverInline(this);
 			} else {
 				consume();
@@ -1990,8 +1740,8 @@ public class csssParser extends Parser {
 		"\16\f\16\16\16\u00bf\13\16\3\17\3\17\3\17\3\17\3\20\3\20\3\20\3\20\3\20"+
 		"\3\20\3\20\5\20\u00cc\n\20\3\21\3\21\3\22\3\22\3\23\3\23\3\24\3\24\3\25"+
 		"\3\25\3\26\3\26\3\27\3\27\3\27\2\4\24\32\30\2\4\6\b\n\f\16\20\22\24\26"+
-		"\30\32\34\36 \"$&(*,\2\n\3\2\5\7\4\2\5\5\13\13\3\2\f\r\3\2\17\20\3\2\26"+
-		"\27\4\2\6\6\30\30\4\2\36\36))\3\2\33\34\u00e4\2\61\3\2\2\2\4\66\3\2\2"+
+		"\30\32\34\36 \"$&(*,\2\n\3\2\5\7\4\2\5\5\13\13\3\2\f\r\3\2\17\20\3\2\24"+
+		"\25\4\2\6\6\26\26\4\2\34\34))\3\2\31\32\u00e4\2\61\3\2\2\2\4\66\3\2\2"+
 		"\2\6<\3\2\2\2\b>\3\2\2\2\nG\3\2\2\2\fN\3\2\2\2\16W\3\2\2\2\20`\3\2\2\2"+
 		"\22b\3\2\2\2\24m\3\2\2\2\26\u0083\3\2\2\2\30\u0093\3\2\2\2\32\u00b0\3"+
 		"\2\2\2\34\u00c0\3\2\2\2\36\u00cb\3\2\2\2 \u00cd\3\2\2\2\"\u00cf\3\2\2"+
@@ -2012,9 +1762,9 @@ public class csssParser extends Parser {
 		"\24\13\tuv\f\7\2\2vw\7\16\2\2w\177\5\24\13\bxy\f\6\2\2yz\t\5\2\2z\177"+
 		"\5\24\13\7{|\f\5\2\2|}\7\21\2\2}\177\5\24\13\6~o\3\2\2\2~r\3\2\2\2~u\3"+
 		"\2\2\2~x\3\2\2\2~{\3\2\2\2\177\u0082\3\2\2\2\u0080~\3\2\2\2\u0080\u0081"+
-		"\3\2\2\2\u0081\25\3\2\2\2\u0082\u0080\3\2\2\2\u0083\u0084\7!\2\2\u0084"+
-		"\u0085\7\22\2\2\u0085\u0086\5*\26\2\u0086\u0087\7\24\2\2\u0087\u0088\5"+
-		"&\24\2\u0088\u0089\7\25\2\2\u0089\u008a\5&\24\2\u008a\u008b\7\23\2\2\u008b"+
+		"\3\2\2\2\u0081\25\3\2\2\2\u0082\u0080\3\2\2\2\u0083\u0084\7\37\2\2\u0084"+
+		"\u0085\7\22\2\2\u0085\u0086\5*\26\2\u0086\u0087\7 \2\2\u0087\u0088\5&"+
+		"\24\2\u0088\u0089\7!\2\2\u0089\u008a\5&\24\2\u008a\u008b\7\23\2\2\u008b"+
 		"\u008d\7\3\2\2\u008c\u008e\5\4\3\2\u008d\u008c\3\2\2\2\u008e\u008f\3\2"+
 		"\2\2\u008f\u008d\3\2\2\2\u008f\u0090\3\2\2\2\u0090\u0091\3\2\2\2\u0091"+
 		"\u0092\7\4\2\2\u0092\27\3\2\2\2\u0093\u0094\7\"\2\2\u0094\u0095\7\22\2"+
@@ -2030,9 +1780,9 @@ public class csssParser extends Parser {
 		"\u00ab\3\2\2\2\u00b0\u00af\3\2\2\2\u00b1\u00bd\3\2\2\2\u00b2\u00b3\f\b"+
 		"\2\2\u00b3\u00b4\t\6\2\2\u00b4\u00bc\5\32\16\t\u00b5\u00b6\f\7\2\2\u00b6"+
 		"\u00b7\t\7\2\2\u00b7\u00bc\5\32\16\b\u00b8\u00b9\f\6\2\2\u00b9\u00ba\7"+
-		"\31\2\2\u00ba\u00bc\5\32\16\7\u00bb\u00b2\3\2\2\2\u00bb\u00b5\3\2\2\2"+
+		"\27\2\2\u00ba\u00bc\5\32\16\7\u00bb\u00b2\3\2\2\2\u00bb\u00b5\3\2\2\2"+
 		"\u00bb\u00b8\3\2\2\2\u00bc\u00bf\3\2\2\2\u00bd\u00bb\3\2\2\2\u00bd\u00be"+
-		"\3\2\2\2\u00be\33\3\2\2\2\u00bf\u00bd\3\2\2\2\u00c0\u00c1\7\32\2\2\u00c1"+
+		"\3\2\2\2\u00be\33\3\2\2\2\u00bf\u00bd\3\2\2\2\u00c0\u00c1\7\30\2\2\u00c1"+
 		"\u00c2\5\32\16\2\u00c2\u00c3\7\t\2\2\u00c3\35\3\2\2\2\u00c4\u00cc\5 \21"+
 		"\2\u00c5\u00cc\5&\24\2\u00c6\u00cc\5$\23\2\u00c7\u00cc\5\"\22\2\u00c8"+
 		"\u00cc\5(\25\2\u00c9\u00cc\5*\26\2\u00ca\u00cc\5,\27\2\u00cb\u00c4\3\2"+

@@ -12,11 +12,16 @@ WS 	: [ \t\r\n] -> skip
 	;
 For : 'for'
     ;
+From
+    : 'from'
+    ;
+To
+    : 'to'
+    ;
 If  : 'if'
     ;
 Else: 'else'
     ;
-
 
 Variable
     : '$' (Character | Digit)+

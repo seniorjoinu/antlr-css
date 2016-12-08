@@ -1,4 +1,4 @@
-// Generated from C:/IdeaProjects/antlr-css1/grammar/src/parse\csss.g4 by ANTLR 4.5.3
+// Generated from C:/IdeaProjects/antlr-css/grammar/src/parse\csss.g4 by ANTLR 4.5.3
 package core.gen;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 

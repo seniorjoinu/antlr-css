@@ -2,6 +2,7 @@ package core.controller;
 
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import org.fxmisc.richtext.StyleClassedTextArea;
 
@@ -20,4 +21,6 @@ public class IdeController {
     public MenuItem runButton;
     @FXML
     public StyleClassedTextArea codeTextArea;
+    @FXML
+    public Label errorLabel;
 }

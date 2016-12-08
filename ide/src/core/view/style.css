@@ -17,3 +17,24 @@
 #htmleditor .header {
     -fx-content-display: none;
 }
+
+.purple {
+    -fx-fill: #FF0094;
+}
+
+.blue {
+    -fx-fill: #0096C9;
+}
+
+.default {
+    -fx-fill: #000;
+}
+
+.bold {
+    -fx-font-weight: bold;
+}
+
+.error {
+    -fx-underline: true;
+    -fx-border-width: 0 0 1 0;
+}

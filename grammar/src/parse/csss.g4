@@ -1,6 +1,20 @@
 grammar csss;
 import lexerRules;
 
+@members {
+    private IdeController controller;
+
+    public csssParser(TokenStream input, IdeController controller) {
+    	this(input);
+    	this.controller = controller;
+    }
+
+    public void notifyErrorListeners(Token offendingToken, String msg, RecognitionException e) {
+        super.notifyErrorListeners(offendingToken, msg, e);
+        this.controller.errorLabel.setText(msg);
+    }
+}
+
 program
     : member*
     ;
@@ -52,7 +66,7 @@ predicate
     ;
 
 forDefinition
-    : For '(' id 'from' startCount=number 'to' endCount=number ')' '{' forBody=member+ '}'
+    : For '(' id From startCount=number To endCount=number ')' '{' forBody=member+ '}'
     ;
 
 ifDefinition
