@@ -38,3 +38,14 @@
     -fx-underline: true;
     -fx-border-width: 0 0 1 0;
 }
+
+.blue-bold {
+    -fx-fill: #0096C9;
+    -fx-font-weight: bold;
+}
+
+#error-log {
+    -fx-background-color: lightgray;
+    -fx-text-fill: red;
+}
+

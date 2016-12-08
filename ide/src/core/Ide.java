@@ -18,9 +18,12 @@ import javafx.stage.Stage;
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 
 public class Ide extends Application {
@@ -53,7 +56,7 @@ public class Ide extends Application {
     }
 
     private void initAlert() {
-        alert = new Alert(Alert.AlertType.ERROR);
+        alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("File successfully compiled");
         alert.setHeaderText("Look, it compiled!");
         alertText = new TextArea();
@@ -75,7 +78,7 @@ public class Ide extends Application {
     }
 
     private void showAlert(File file) {
-        alert.setContentText("Result file" + file.getPath());
+        alert.setContentText("Result file " + file.getPath());
 
         try (
                 InputStream in = Files.newInputStream(file.toPath());
@@ -95,10 +98,29 @@ public class Ide extends Application {
         alert.showAndWait();
     }
 
+    private boolean hasErrors(csssParser parser) {
+        try {
+            for (int i = 0; i < parser.getClass().getMethods().length; i++) {
+                Method cur = parser.getClass().getMethods()[i];
+                if (cur.getReturnType().equals(ParserRuleContext.class)) {
+                    if (((ParserRuleContext) cur.invoke(parser)).exception != null)
+                        return true;
+                }
+            }
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
     private void highlight() {
         lexer = new csssLexer(new ANTLRInputStream(controller.codeTextArea.getText()));
         parser = new csssParser(new CommonTokenStream(lexer), controller);
         highlighter.visit(parser.program());
+        /*if (!hasErrors(parser)) {
+            controller.errorLabel.setText("");
+        }*/
     }
 
     private void initRootLayout() {
@@ -125,6 +147,7 @@ public class Ide extends Application {
                     }
 
                     controller.codeTextArea.replaceText(result);
+                    highlight();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -150,6 +173,8 @@ public class Ide extends Application {
             });
 
             controller.runButton.setOnAction(event -> {
+                controller.saveButton.fire();
+
                 try {
                     lexer = new csssLexer(new ANTLRFileStream(file.getPath()));
                     parser = new csssParser(new CommonTokenStream(lexer));
@@ -166,7 +191,13 @@ public class Ide extends Application {
                 }
             });
 
-            controller.codeTextArea.setOnKeyPressed(event -> {
+            controller.newButton.setOnAction(event -> {
+                controller.saveButton.fire();
+                file = null;
+                controller.codeTextArea.clear();
+            });
+
+            controller.codeTextArea.setOnKeyReleased(event -> {
                 highlight();
             });
 

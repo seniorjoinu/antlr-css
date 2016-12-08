@@ -3,9 +3,6 @@ package core.syntax;
 import core.controller.IdeController;
 import core.gen.csssBaseVisitor;
 import core.gen.csssParser;
-import org.antlr.v4.runtime.ParserRuleContext;
-import org.antlr.v4.runtime.RuleContext;
-import org.fxmisc.richtext.StyleClassedTextArea;
 
 public class Highlighter extends csssBaseVisitor<String> {
     private IdeController controller;
@@ -14,15 +11,10 @@ public class Highlighter extends csssBaseVisitor<String> {
         this.controller = controller;
     }
 
-    private void styleError(ParserRuleContext ctx) {
-        if (ctx.exception != null) {
-            controller.codeTextArea.setStyleClass(ctx.getStart().getStartIndex(), ctx.getStop().getStopIndex() + 1, "error");
-        }
-    }
-
     @Override
     public String visitProgram(csssParser.ProgramContext ctx) {
         controller.codeTextArea.setStyleClass(0, controller.codeTextArea.getText().length(), "default");
+        ctx.member().forEach(this::visit);
         return super.visitProgram(ctx);
     }
 
@@ -34,49 +26,38 @@ public class Highlighter extends csssBaseVisitor<String> {
 
     @Override
     public String visitForDefinition(csssParser.ForDefinitionContext ctx) {
-        styleError(ctx);
         controller.codeTextArea.setStyleClass(ctx.For().getSymbol().getStartIndex(), ctx.For().getSymbol().getStopIndex() + 1, "purple");
         controller.codeTextArea.setStyleClass(ctx.From().getSymbol().getStartIndex(), ctx.From().getSymbol().getStopIndex() + 1, "purple");
         controller.codeTextArea.setStyleClass(ctx.To().getSymbol().getStartIndex(), ctx.To().getSymbol().getStopIndex() + 1, "purple");
-
+        ctx.member().forEach(this::visit);
         return super.visitForDefinition(ctx);
     }
 
     @Override
     public String visitIfDefinition(csssParser.IfDefinitionContext ctx) {
-        styleError(ctx);
         controller.codeTextArea.setStyleClass(ctx.If().getSymbol().getStartIndex(), ctx.If().getSymbol().getStopIndex() + 1, "purple");
         controller.codeTextArea.setStyleClass(ctx.Else().getSymbol().getStartIndex(), ctx.Else().getSymbol().getStopIndex() + 1, "purple");
+        ctx.member().forEach(this::visit);
         return super.visitIfDefinition(ctx);
     }
 
     @Override
     public String visitVarDefinition(csssParser.VarDefinitionContext ctx) {
-        styleError(ctx);
+        controller.codeTextArea.setStyleClass(ctx.id().getStart().getStartIndex(), ctx.id().getStop().getStopIndex() + 1, "blue");
+        visit(ctx.expression());
         return super.visitVarDefinition(ctx);
     }
 
     @Override
     public String visitClassDefinition(csssParser.ClassDefinitionContext ctx) {
-        styleError(ctx);
+        controller.codeTextArea.setStyleClass(ctx.selector().getStart().getStartIndex(), ctx.selector().getStop().getStopIndex() + 1, "blue-bold");
+        visit(ctx.classBody());
         return super.visitClassDefinition(ctx);
-    }
-
-    @Override
-    public String visitSelector(csssParser.SelectorContext ctx) {
-        controller.codeTextArea.setStyleClass(ctx.getStart().getStartIndex(), ctx.getStop().getStopIndex() + 1, "blue bold");
-        return super.visitSelector(ctx);
     }
 
     @Override
     public String visitPropName(csssParser.PropNameContext ctx) {
         controller.codeTextArea.setStyleClass(ctx.getStart().getStartIndex(), ctx.getStop().getStopIndex() + 1, "bold");
         return super.visitPropName(ctx);
-    }
-
-    @Override
-    public String visitId(csssParser.IdContext ctx) {
-        controller.codeTextArea.setStyleClass(ctx.getStart().getStartIndex(), ctx.getStop().getStopIndex() + 1, "blue");
-        return super.visitId(ctx);
     }
 }

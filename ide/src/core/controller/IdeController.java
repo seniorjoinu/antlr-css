@@ -4,6 +4,7 @@ package core.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
 import org.fxmisc.richtext.StyleClassedTextArea;
 
 public class IdeController {
@@ -22,5 +23,5 @@ public class IdeController {
     @FXML
     public StyleClassedTextArea codeTextArea;
     @FXML
-    public Label errorLabel;
+    public TextArea errorLog;
 }

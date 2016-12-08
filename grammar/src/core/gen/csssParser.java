@@ -6,9 +6,9 @@ import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
-import java.util.List;
-import java.util.Iterator;
-import java.util.ArrayList;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class csssParser extends Parser {
@@ -104,7 +104,7 @@ public class csssParser extends Parser {
 
 	    public void notifyErrorListeners(Token offendingToken, String msg, RecognitionException e) {
 	        super.notifyErrorListeners(offendingToken, msg, e);
-	        this.controller.errorLabel.setText(msg);
+	        this.controller.errorLog.appendText(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()) + ": " + msg + "\n");
 	    }
 
 	public csssParser(TokenStream input) {
