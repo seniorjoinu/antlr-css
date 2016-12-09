@@ -30,7 +30,7 @@ public class CsssVisitor extends csssBaseVisitor<Variable> {
         } else if (ctx.propValue().name() != null) {
             return new Variable(VarType.PROPERTY, ctx.propValue().getText());
         } else if (ctx.propValue().id() != null) {
-            return vMachine.getVariable(ctx.propValue().getText());
+            return vMachine.getVariable(ctx.propValue().getText()).getCopy();
         } else if (ctx.propValue().numberUnit() != null) {
             return new Variable(VarType.NUMBERUNIT, ctx.propValue().getText());
         } else if (ctx.propValue().number() != null) {
@@ -54,10 +54,38 @@ public class CsssVisitor extends csssBaseVisitor<Variable> {
     @Override
     public Variable visitIfDefinition(csssParser.IfDefinitionContext ctx) {
         if (visit(ctx.predicate()).getData().equals("true")) {
-            return visit(ctx.trueMembers);
+
+            // TODO: если нет класса, будет парашка
+            ctx.trueMember().forEach(trueMemberContext -> {
+                if (trueMemberContext.property() != null) {
+                    csssParser.PropertyContext pctx = trueMemberContext.property();
+                    CssProperty property = new CssProperty(pctx.propName().getText());
+                    for (csssParser.ExpressionContext ectx: pctx.expression()) {
+                        property.addValue(visit(ectx));
+                    }
+                    vMachine.addProperty(property);
+                }
+            });
+            ctx.trueMember().forEach(this::visit);
+
+            return null;
+
         } else {
-            return visit(ctx.falseMembers);
+            // TODO: если нет класса, будет парашка
+            ctx.falseMember().forEach(falseMemberContext -> {
+                if (falseMemberContext.property() != null) {
+                    csssParser.PropertyContext pctx = falseMemberContext.property();
+                    CssProperty property = new CssProperty(pctx.propName().getText());
+                    for (csssParser.ExpressionContext ectx: pctx.expression()) {
+                        property.addValue(visit(ectx));
+                    }
+                    vMachine.addProperty(property);
+                }
+            });
+            ctx.falseMember().forEach(this::visit);
         }
+
+        return null;
     }
 
     // определение тела цикла
@@ -68,7 +96,7 @@ public class CsssVisitor extends csssBaseVisitor<Variable> {
 
         vMachine.storeVariable(ctx.id().getText(), new Variable(VarType.NUMBER, start));
         for (long i = start; i <= end; i++) {
-            visit(ctx.forBody);
+            ctx.member().forEach(this::visit);
             vMachine.getVariable(ctx.id().getText()).setData(i+1);
         }
         vMachine.unstoreVariable(ctx.id().getText());
@@ -200,14 +228,28 @@ public class CsssVisitor extends csssBaseVisitor<Variable> {
 
 
     /* Что касается классов */
-
     @Override
     public Variable visitSelector(csssParser.SelectorContext ctx) {
-        if (ctx.op != null) {
-            vMachine.startClass(ctx.op.getText() + " " + ctx.getText().substring(1));
-        } else {
-            vMachine.startClass(ctx.getText());
+        String selector = "";
+        String pseudo = "";
+
+        for (csssParser.PseudoContext pctx: ctx.pseudo()) {
+            if (pctx.PseudoClass() != null) {
+                pseudo += pctx.PseudoClass();
+            } else if (pctx.PseudoElement() != null) {
+                pseudo += pctx.PseudoElement() + "(" + vMachine.getVariable(pctx.id().getText()).getCopy().getData() + ")";
+            }
         }
+
+        for (csssParser.MainSelectorContext mctx: ctx.mainSelector()) {
+            if (mctx.op != null) {
+                selector = mctx.op.getText() + " " + mctx.getText().substring(1).trim();
+            } else {
+                selector = mctx.getText();
+            }
+        }
+
+        vMachine.startClass(selector + pseudo);
         return null;
     }
 
@@ -222,10 +264,7 @@ public class CsssVisitor extends csssBaseVisitor<Variable> {
             vMachine.addProperty(property);
         }
 
-        //TODO: тут можно задать отдельную логику для выражений
-        ctx.definition().stream().filter(dctx -> dctx.classDefinition() != null).forEach(dctx -> {
-            visit(dctx.classDefinition());
-        });
+        ctx.definition().forEach(this::visit);
         vMachine.endClass();
 
         return null;

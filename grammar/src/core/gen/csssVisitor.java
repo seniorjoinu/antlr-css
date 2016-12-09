@@ -17,6 +17,18 @@ public interface csssVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProgram(csssParser.ProgramContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link csssParser#trueMember}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTrueMember(csssParser.TrueMemberContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link csssParser#falseMember}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFalseMember(csssParser.FalseMemberContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link csssParser#member}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -40,6 +52,18 @@ public interface csssVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSelector(csssParser.SelectorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link csssParser#pseudo}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPseudo(csssParser.PseudoContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link csssParser#mainSelector}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMainSelector(csssParser.MainSelectorContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link csssParser#classBody}.
 	 * @param ctx the parse tree

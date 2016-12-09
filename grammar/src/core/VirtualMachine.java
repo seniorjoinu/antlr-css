@@ -56,7 +56,7 @@ public class VirtualMachine {
 
     public void startClass(String selector) {
         currentSelector.push(selector);
-        classes.put(concatSelector(), new CssClass(concatSelector()));
+        classes.putIfAbsent(concatSelector(), new CssClass(concatSelector()));
     }
 
     public void addProperty(CssProperty property) {

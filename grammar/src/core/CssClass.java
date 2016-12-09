@@ -1,18 +1,15 @@
 package core;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CssClass {
     private String selector;
-    private List<CssProperty> properties;
+    private Map<String, CssProperty> properties;
 
     public CssClass(String selector) {
         this.selector = selector;
-        properties = new ArrayList<>();
+        properties = new TreeMap<>();
     }
 
     public String getSelector() {
@@ -23,37 +20,36 @@ public class CssClass {
         this.selector = selector;
     }
 
-    public List<CssProperty> getProperties() {
+    public Map<String, CssProperty> getProperties() {
         return properties;
     }
 
-    public void setProperties(List<CssProperty> properties) {
+    public void setProperties(Map<String, CssProperty> properties) {
         this.properties = properties;
     }
 
     public CssProperty getPropertyByName(String propName) {
-        List<CssProperty> props = properties.stream().filter(prop -> prop.getName().equals(propName)).collect(Collectors.toList());
-        if (props.size() > 0) {
-            return props.get(0);
-        }
-        return null;
+        return properties.get(propName);
     }
 
     //TODO: поправить коллизию имен
     public void addProperty(CssProperty property) {
-        this.properties.add(property);
+        this.properties.put(property.getName(), property);
     }
 
     //TODO: доделать вложенность
     // можно сделать минимизированную модификацию
     @Override
     public String toString() {
-        String result = selector + " {\n";
-        for (CssProperty property: properties) {
-            result += "\t" + property.toString() + "\n";
+        if (properties.size() > 0) {
+            String result = selector + " {\n";
+            for (CssProperty property : properties.values()) {
+                result += "\t" + property.toString() + "\n";
+            }
+            result += "}\n";
+            return result;
+        } else {
+            return "";
         }
-        result += "}\n";
-
-        return result;
     }
 }

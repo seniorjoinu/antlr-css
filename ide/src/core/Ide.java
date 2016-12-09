@@ -198,7 +198,7 @@ public class Ide extends Application {
             });
 
             controller.codeTextArea.setOnKeyReleased(event -> {
-                highlight();
+                if (!event.getCode().isArrowKey()) highlight();
             });
 
             Scene scene = new Scene(rootLayout);

@@ -62,6 +62,10 @@ public class Variable {
         }
     }
 
+    public Variable getCopy() {
+        return new Variable(this.type, this.data);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

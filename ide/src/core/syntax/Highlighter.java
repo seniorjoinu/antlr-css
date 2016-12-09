@@ -36,8 +36,11 @@ public class Highlighter extends csssBaseVisitor<String> {
     @Override
     public String visitIfDefinition(csssParser.IfDefinitionContext ctx) {
         controller.codeTextArea.setStyleClass(ctx.If().getSymbol().getStartIndex(), ctx.If().getSymbol().getStopIndex() + 1, "purple");
-        controller.codeTextArea.setStyleClass(ctx.Else().getSymbol().getStartIndex(), ctx.Else().getSymbol().getStopIndex() + 1, "purple");
-        ctx.member().forEach(this::visit);
+        ctx.trueMember().forEach(this::visit);
+        if (ctx.falseMember(0) != null) {
+            controller.codeTextArea.setStyleClass(ctx.Else().getSymbol().getStartIndex(), ctx.Else().getSymbol().getStopIndex() + 1, "purple");
+            ctx.falseMember().forEach(this::visit);
+        }
         return super.visitIfDefinition(ctx);
     }
 
@@ -56,8 +59,15 @@ public class Highlighter extends csssBaseVisitor<String> {
     }
 
     @Override
-    public String visitPropName(csssParser.PropNameContext ctx) {
-        controller.codeTextArea.setStyleClass(ctx.getStart().getStartIndex(), ctx.getStop().getStopIndex() + 1, "bold");
-        return super.visitPropName(ctx);
+    public String visitClassBody(csssParser.ClassBodyContext ctx) {
+        ctx.definition().forEach(this::visit);
+        ctx.property().forEach(this::visit);
+        return super.visitClassBody(ctx);
+    }
+
+    @Override
+    public String visitProperty(csssParser.PropertyContext ctx) {
+        controller.codeTextArea.setStyleClass(ctx.propName().getStart().getStartIndex(), ctx.propName().getStop().getStopIndex() + 1, "bold");
+        return super.visitProperty(ctx);
     }
 }

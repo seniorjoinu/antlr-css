@@ -30,7 +30,7 @@ Color
 	: '#' (Hex Hex Hex) | (Hex Hex Hex Hex Hex Hex)
 	;
 Selector
-	: (Html | (('#'|'.') Character (Character | Digit)*) | '*') (PseudoClass | PseudoElement '(' .*? ')' )*
+	: (Html | (('#'|'.') Character (Character | Digit)*) | '*')
 	;
 Name
 	: Character+

@@ -10,13 +10,23 @@ import lexerRules;
     }
 
     public void notifyErrorListeners(Token offendingToken, String msg, RecognitionException e) {
-        super.notifyErrorListeners(offendingToken, msg, e);
-        this.controller.errorLabel.setText(msg);
+    	super.notifyErrorListeners(offendingToken, msg, e);
+    	this.controller.errorLog.appendText(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()) + ": " + msg + "\n");
     }
 }
 
 program
     : member*
+    ;
+
+trueMember
+    : member
+    | property
+    ;
+
+falseMember
+    : member
+    | property
     ;
 
 member
@@ -36,11 +46,19 @@ classDefinition
     ;
 
 selector
-	: (op=('>'|'+'|'~')? Selector)+
+	: (mainSelector (pseudo)*)+
 	;
 
+pseudo
+    : (PseudoElement '(' id ')' | PseudoClass)
+    ;
+
+mainSelector
+    : op=('>'|'+'|'~')? Selector
+    ;
+
 classBody
-	: property* definition*
+	: (property | definition)*
 	;
 
 property
@@ -66,11 +84,11 @@ predicate
     ;
 
 forDefinition
-    : For '(' id From startCount=number To endCount=number ')' '{' forBody=member+ '}'
+    : For '(' id From startCount=number To endCount=number ')' '{' member+ '}'
     ;
 
 ifDefinition
-    : If '(' predicate ')' '{' trueMembers=member+ '}' (Else '{' falseMembers=member+ '}')?
+    : If '(' predicate ')' '{' trueMember+ '}' (Else '{' falseMember+ '}')?
     ;
 
 expression
